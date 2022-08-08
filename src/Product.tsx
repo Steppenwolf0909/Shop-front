@@ -15,7 +15,7 @@ export default function Product(props: any){
       <button
         className={btnClass.join(' ')}
         onClick={() => {setDetails(!details)}}>
-        { details ? 'Show' : 'Hide'}
+        { details ? 'Hide' : 'Show'}
       </button>
 
       {details && <span>
