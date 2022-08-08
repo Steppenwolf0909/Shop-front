@@ -1,24 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
+import Product from "./Product";
+
+import axios from "axios";
 
 function App() {
+  const [prods, setProds] = useState([])
+  async function fetchProds(){
+    const resp = await axios.get('https://fakestoreapi.com/products?limit=5')
+    setProds(resp.data)
+  }
+
+  useEffect(() => {
+    fetchProds()
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {prods.map(prod => <Product prod={prod} />)}
+
     </div>
   );
 }
