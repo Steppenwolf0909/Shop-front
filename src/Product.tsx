@@ -1,17 +1,29 @@
 import {useState} from "react";
 
+export interface IProduct {
+  id?: number
+  title: string
+  price: number
+  description: string
+  image: string
+  category: string
+  rating: {
+    rate: number
+    count: number
+  }
+}
 
-export default function Product(props: any){
+export default function Product({prod}: any){
   const [details, setDetails] = useState(false)
   const btnColor = details ? 'bg-yellow-400' : 'bg-blue-400'
   const btnClass = ['py-2 px-4 border', btnColor]
   return (
     <div>
       <h1>
-      {props.prod.title}
+      {prod.title}
       </h1>
-      <span>{props.prod.price}</span>
-      <img className="w-1/6" src={props.prod.image} />
+      <span>{prod.price}</span>
+      <img className="w-1/6" src={prod.image} />
       <button
         className={btnClass.join(' ')}
         onClick={() => {setDetails(!details)}}>
@@ -19,7 +31,7 @@ export default function Product(props: any){
       </button>
 
       {details && <span>
-        {props.prod.description}
+        {prod.description}
       </span>
       }
     </div>

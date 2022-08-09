@@ -1,10 +1,15 @@
 import {useEffect, useState} from "react";
 import axios, {AxiosError} from "axios";
+import {IProduct} from "../Product";
 
 export default function useProducts() {
-  const [prods, setProds] = useState([])
+  const [prods, setProds] = useState<IProduct[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+
+  function saveProduct(prod: IProduct){
+    setProds(prev => [...prev, prod])
+  }
 
   async function fetchProds() {
     try {
@@ -23,5 +28,5 @@ export default function useProducts() {
   useEffect(() => {
     fetchProds()
   }, [])
-  return {prods, error, loading}
+  return {prods, error, loading, saveProduct}
 }
